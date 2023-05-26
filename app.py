@@ -20,9 +20,8 @@ embeddings = OpenAIEmbeddings()
 
 namespaces = set()
 
-welcome_message = """Welcome to the Chainlit PDF QA demo! To get started:
-1. Upload a PDF or text file
-2. Ask a question about the file
+welcome_message = """Welcome to the ChatPDF App! Get started by uploading your PDF files.
+Note: File size limit is 20MB.
 """
 
 
@@ -49,7 +48,8 @@ def langchain_factory():
     file = None
     while file is None:
         file = cl.ask_for_file(
-            title=welcome_message, accept=["text/plain", "application/pdf"], timeout=180
+            title=welcome_message, accept=["text/plain", "application/pdf"], timeout=180,
+            max_size_mb=20,
         )
 
     docs = process_file(file)
